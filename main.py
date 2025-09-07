@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
-test_file = "input_test_data.csv"
+test_file = "path/to/test_data.csv"
+
 # Function to calculate the number of decimal places in a value
 def count_decimal_places(value):
     if np.isnan(value):
