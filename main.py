@@ -34,7 +34,11 @@ def iterative_interpolation(df):
 # ---------------------------
 st.title("CSV Interpolation App")
 st.write("Upload a CSV file, interpolate missing values, preview results, and download.")
-
+st.write("""
+This interactive app allows you to upload a CSV file containing missing values, 
+performs iterative interpolation using neighboring values, previews the results, 
+and lets you download the processed CSV. Perfect for quick data cleaning and analysis!
+""")
 # ---------------------------
 # File Upload
 # ---------------------------
