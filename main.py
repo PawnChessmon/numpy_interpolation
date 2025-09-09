@@ -44,7 +44,7 @@ previews the results, and lets you download the processed CSV.
 # ---------------------------
 uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
 
-use_sample = st.checkbox("Use sample dataset (input_test_data.csv)")
+use_sample = st.checkbox("Use sample dataset")
 
 df_input = None
 if uploaded_file:
