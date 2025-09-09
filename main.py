@@ -52,7 +52,7 @@ if uploaded_file:
 elif use_sample:
     sample_path = os.path.join(os.path.dirname(__file__), "input_test_data.csv")
     df_input = pd.read_csv(sample_path, header=None)
-    #st.info("Loaded sample dataset: `input_test_data.csv`")
+    st.info("Loaded sample dataset: `input_test_data.csv`")
 
 # ---------------------------
 # Display & Interpolation
