@@ -1,7 +1,7 @@
-# main.py
 import streamlit as st
 import pandas as pd
 import numpy as np
+import os
 
 # ---------------------------
 # Function: Interpolate Data
@@ -33,20 +33,31 @@ def iterative_interpolation(df):
 # Streamlit App Layout
 # ---------------------------
 st.title("CSV Interpolation App")
-st.write("Upload a CSV file, interpolate missing values, preview results, and download.")
 st.write("""
-This interactive app allows you to upload a CSV file containing missing values, 
-performs iterative interpolation using neighboring values, previews the results, 
-and lets you download the processed CSV. Perfect for quick data cleaning and analysis!
+Upload a CSV file or try the built-in sample dataset.  
+This app interpolates missing values using neighboring values, 
+previews the results, and lets you download the processed CSV.
 """)
+
 # ---------------------------
-# File Upload
+# File Upload + Sample Data
 # ---------------------------
 uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
 
+use_sample = st.checkbox("Use sample dataset (input_test_data.csv)")
+
+df_input = None
 if uploaded_file:
-    # Read CSV exactly as it is (no headers)
     df_input = pd.read_csv(uploaded_file, header=None)
+elif use_sample:
+    sample_path = os.path.join(os.path.dirname(__file__), "input_test_data.csv")
+    df_input = pd.read_csv(sample_path, header=None)
+    st.info("Loaded sample dataset: `input_test_data.csv`")
+
+# ---------------------------
+# Display & Interpolation
+# ---------------------------
+if df_input is not None:
     st.subheader("Original Data")
     st.dataframe(df_input)
 
@@ -55,10 +66,10 @@ if uploaded_file:
         st.subheader("Interpolated Data")
         st.dataframe(df_result)
 
-        csv = df_result.to_csv(index=False, header=False).encode('utf-8')
+        csv = df_result.to_csv(index=False, header=False).encode("utf-8")
         st.download_button(
             label="Download Interpolated CSV",
             data=csv,
             file_name="interpolated_results.csv",
-            mime="text/csv"
+            mime="text/csv",
         )
